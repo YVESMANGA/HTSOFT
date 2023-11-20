@@ -1,0 +1,26 @@
+type Employe {
+    id: ID!
+    nom: String!
+    emploi: String!
+    salaire: Float!
+    departement_id: ID!
+    chef_departement_id: ID
+    departement: Departement
+}
+
+type Departement {
+    id: ID!
+    nom_departement: String!
+    chef_departement_id: ID
+    chef_departement: Employe
+}
+
+extend type Mutation {
+    ajouterEmploye(nom: String!, emploi: String!, salaire: Float!, departement_id: ID!, chef_departement_id: ID): Employe @create
+    mettreAJourEmploye(id: ID!, nom: String, emploi: String, salaire: Float, departement_id: ID, chef_departement_id: ID): Employe @update
+    supprimerEmploye(id: ID!): Employe @delete
+
+    ajouterDepartement(nom_departement: String!, chef_departement_id: ID): Departement @create
+    mettreAJourDepartement(id: ID!, nom_departement: String, chef_departement_id: ID): Departement @update
+    supprimerDepartement(id: ID!): Departement @delete
+}
